@@ -27,9 +27,8 @@ import {
 } from "firebase/firestore";
 
 // ---------------------------------------------------------
-// إعدادات Firebase
+// إعدادات Firebase (يجب أن تبقى كما هي)
 // ---------------------------------------------------------
-// يجب تعريف هذه المتغيرات في البيئة (Canvas Environment)
 const appId = typeof __app_id !== "undefined" ? __app_id : "default-app-id";
 const firebaseConfig =
   typeof __firebase_config !== "undefined" ? JSON.parse(__firebase_config) : {};
@@ -85,19 +84,16 @@ const t = {
     doctorRole: "طبيب",
     logout: "تسجيل الخروج",
     pendingRole: "معلق",
-    // حقول التسجيل المتقدمة
     college: "الكلية الطبية",
     seniority: "الدرجة الوظيفية",
     junior: "جونيور",
     mid: "ميد سينيور",
     senior: "سينيور",
-    // أقسام المريض
     personalHistory: "السجل الشخصي وعوامل الخطورة",
     examination: "فحص القراءات والقياسات",
     investigations: "التحاليل والأشعة",
     presentation: "شكوى المريض الحالية (Presentation)",
     riskFactors: "عوامل الخطورة (Risk Factors)",
-    // عوامل الخطورة
     hypertension: "ضغط دم مرتفع",
     diabetes: "سكري",
     af: "رجفان أذيني (AF)",
@@ -108,12 +104,10 @@ const t = {
     hepatic: "مشاكل كبدية",
     smoker: "مدخن",
     addict: "إدمان/تعاطي",
-    // بيانات الفحص
     bp: "ضغط الدم (BP)",
     rbs: "سكر عشوائي (RBS)",
     ipp: "القوة العضلية (Power)",
     consciousLevel: "مستوى الوعي",
-    // التحاليل
     laboratory: "التحاليل المخبرية (Laboratory)",
     cbc: "تعداد الدم الكامل (CBC)",
     creat: "كرياتينين (Creat)",
@@ -128,7 +122,6 @@ const t = {
     urineAnalysis: "تحليل البول",
     csf: "سائل النخاع الشوكي (CSF)",
     autoimmuneStudies: "دراسات المناعة الذاتية",
-    // الأشعة
     imaging: "الأشعة والفحوصات (Imaging)",
     ct: "أشعة مقطعية (CT)",
     mri: "رنين مغناطيسي (MRI)",
@@ -137,12 +130,13 @@ const t = {
     emg: "تخطيط العضلات (EMG)",
     vep: "كمونات محرضة (VEP)",
     fundusEx: "فحص قاع العين",
-    // حقول عامة
     value: "القيمة/النتيجة",
     note: "ملاحظات الطبيب",
     uploadImage: "إرفاق صورة (بحد أقصى 800KB)",
     image: "صورة",
     noImage: "لا توجد صورة مرفقة",
+    age: "العمر",
+    patientRecord: "سجل المريض",
   },
   en: {
     appTitle: "MedTrac - Medical Tracker",
@@ -171,19 +165,16 @@ const t = {
     doctorRole: "Doctor",
     logout: "Logout",
     pendingRole: "Pending",
-    // Advanced Registration Fields
     college: "Medical College",
     seniority: "Seniority Level",
     junior: "Junior",
     mid: "Mid Senior",
     senior: "Senior",
-    // Patient Sections
     personalHistory: "Personal History & Risk Factors",
     examination: "Measurements & Examination",
     investigations: "Labs & Imaging",
     presentation: "Current Presentation",
     riskFactors: "Risk Factors",
-    // Risk Factors
     hypertension: "Hypertension",
     diabetes: "Diabetes",
     af: "Atrial Fibrillation (AF)",
@@ -194,12 +185,10 @@ const t = {
     hepatic: "Hepatic Problems",
     smoker: "Smoker",
     addict: "Addict",
-    // Examination Data
     bp: "Blood Pressure (BP)",
     rbs: "Random Blood Sugar (RBS)",
     ipp: "Muscle Power",
     consciousLevel: "Conscious Level",
-    // Investigations
     laboratory: "Laboratory Tests",
     cbc: "Complete Blood Count (CBC)",
     creat: "Creatinine (Creat)",
@@ -214,7 +203,6 @@ const t = {
     urineAnalysis: "Urine Analysis",
     csf: "CSF",
     autoimmuneStudies: "Autoimmune Studies",
-    // Imaging
     imaging: "Imaging and Diagnostics",
     ct: "CT Scan",
     mri: "MRI",
@@ -223,7 +211,6 @@ const t = {
     emg: "Electromyography (EMG)",
     vep: "Visual Evoked Potential (VEP)",
     fundusEx: "Fundus Examination",
-    // General Fields
     value: "Value/Result",
     note: "Doctor's Note",
     uploadImage: "Attach Image (Max 800KB)",
@@ -431,7 +418,7 @@ const Icons = {
 };
 
 // 1. شاشة لوحة تحكم المدير (Admin Dashboard)
-const AdminDashboard = ({ lang, dark, userId, setRole, txt }) => {
+const AdminDashboard = ({ lang, dark, userId, setRole, txt, appId }) => {
   const [pendingDoctors, setPendingDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [confirmModal, setConfirmModal] = useState(null);
@@ -442,7 +429,7 @@ const AdminDashboard = ({ lang, dark, userId, setRole, txt }) => {
   );
 
   useEffect(() => {
-    const q = query(doctorsColRef, where("role", "==", "pending"));
+    const q = query(doctorsColRef, where("role", "==", "admin")); // فقط لتعريف المدير
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
@@ -450,11 +437,11 @@ const AdminDashboard = ({ lang, dark, userId, setRole, txt }) => {
           id: doc.id,
           ...doc.data(),
         }));
-        setPendingDoctors(doctors);
+        // بما أننا ألغينا التفعيل، هذه الشاشة لن تعرض بيانات pending
         setLoading(false);
       },
       (error) => {
-        console.error("Error reading pending doctors:", error);
+        console.error("Error reading doctors:", error);
         setLoading(false);
       }
     );
@@ -462,77 +449,7 @@ const AdminDashboard = ({ lang, dark, userId, setRole, txt }) => {
     return () => unsubscribe();
   }, [userId]);
 
-  const handleAction = async (docId, action) => {
-    try {
-      const doctorRef = doc(doctorsColRef, docId);
-      if (action === "activate") {
-        await updateDoc(doctorRef, { role: "doctor" });
-        if (docId === userId) setRole("doctor");
-      } else if (action === "delete") {
-        await deleteDoc(doctorRef);
-        // لا نحتاج لحذف حساب Auth لأن المستخدم لن يستطيع الدخول بدونه
-      }
-      setConfirmModal(null);
-    } catch (e) {
-      console.error("Error performing action:", e);
-      alert("حدث خطأ أثناء تنفيذ الإجراء.");
-    }
-  };
-
-  const Modal = () => {
-    if (!confirmModal) return null;
-    const { type, docId, email, seniority, college } = confirmModal;
-    const isActivate = type === "activate";
-
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div
-          className={`p-6 rounded-lg shadow-2xl w-full max-w-md ${
-            dark ? "bg-slate-700 text-white" : "bg-white text-slate-800"
-          }`}
-        >
-          <h3 className="text-xl font-bold mb-4">
-            {isActivate ? txt.confirmActivate : txt.confirmDelete}
-          </h3>
-          <p className="mb-2">
-            {txt.email}: **{email}**
-          </p>
-          <p className="mb-2">
-            {txt.seniority}: **{txt[seniority] || seniority}**
-          </p>
-          <p className="mb-6">
-            {txt.college}: **{college}**
-          </p>
-          <div className="flex justify-end space-x-3">
-            <button
-              onClick={() => setConfirmModal(null)}
-              className="py-2 px-4 rounded-lg border transition-colors"
-            >
-              {lang === "ar" ? "إلغاء" : "Cancel"}
-            </button>
-            <button
-              onClick={() => handleAction(docId, type)}
-              className={`py-2 px-4 rounded-lg font-bold transition-colors ${
-                isActivate
-                  ? "bg-green-600 text-white hover:bg-green-700"
-                  : "bg-red-600 text-white hover:bg-red-700"
-              }`}
-            >
-              {isActivate ? txt.activate : txt.delete}
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  if (loading)
-    return (
-      <div className="text-center p-10">
-        {lang === "ar" ? "جاري التحميل..." : "Loading..."}
-      </div>
-    );
-
+  // بما أننا ألغينا نظام التفعيل، هذا المكون سيعرض رسالة بسيطة فقط
   return (
     <div className="p-4 md:p-8">
       <h1
@@ -542,86 +459,23 @@ const AdminDashboard = ({ lang, dark, userId, setRole, txt }) => {
       >
         {txt.adminDashboard}
       </h1>
-      <h2
-        className={`text-xl font-semibold mb-4 ${
-          dark ? "text-slate-300" : "text-slate-600"
+      <div
+        className={`p-6 rounded-xl border-2 border-dashed ${
+          dark
+            ? "border-slate-700 text-slate-400"
+            : "border-gray-200 text-gray-500"
         }`}
       >
-        {txt.pendingDoctors} ({pendingDoctors.length})
-      </h2>
-      {pendingDoctors.length === 0 ? (
-        <div
-          className={`p-6 rounded-xl border-2 border-dashed ${
-            dark
-              ? "border-slate-700 text-slate-400"
-              : "border-gray-200 text-gray-500"
-          }`}
-        >
-          {lang === "ar"
-            ? "لا يوجد أطباء جدد بانتظار التفعيل."
-            : "No new doctors awaiting activation."}
-        </div>
-      ) : (
-        <div className="space-y-4">
-          {pendingDoctors.map((doctor) => (
-            <div
-              key={doctor.id}
-              className={`p-4 rounded-xl shadow-md flex justify-between items-center ${
-                dark ? "bg-slate-800 text-white" : "bg-white text-slate-800"
-              }`}
-            >
-              <div>
-                <p className="font-bold">{doctor.email}</p>
-                <p
-                  className={`text-sm ${
-                    dark ? "text-slate-400" : "text-gray-500"
-                  }`}
-                >
-                  {txt.seniority}: {txt[doctor.seniority] || doctor.seniority} /{" "}
-                  {txt.college}: {doctor.college}
-                </p>
-              </div>
-              <div className="flex space-x-2">
-                <button
-                  onClick={() =>
-                    setConfirmModal({
-                      type: "activate",
-                      docId: doctor.id,
-                      email: doctor.email,
-                      seniority: doctor.seniority,
-                      college: doctor.college,
-                    })
-                  }
-                  className="p-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors"
-                  title={txt.activate}
-                >
-                  <Icons.Check className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={() =>
-                    setConfirmModal({
-                      type: "delete",
-                      docId: doctor.id,
-                      email: doctor.email,
-                    })
-                  }
-                  className="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
-                  title={txt.delete}
-                >
-                  <Icons.X className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      <Modal />
+        {lang === "ar"
+          ? "تم تعطيل نظام تفعيل الأطباء. يمكن للمدير استخدام لوحة المرضى مباشرة."
+          : "Doctor activation system is currently disabled. Admin can use the main patient dashboard."}
+      </div>
     </div>
   );
 };
 
 // 2. شاشة إدارة المرضى (Doctors Dashboard)
-const DoctorsDashboard = ({ lang, dark, userId, txt }) => {
+const DoctorsDashboard = ({ lang, dark, userId, txt, appId }) => {
   const [patients, setPatients] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
@@ -658,7 +512,7 @@ const DoctorsDashboard = ({ lang, dark, userId, txt }) => {
         await deleteDoc(doc(patientsColRef, id));
         setSelectedPatient(null);
       } catch (e) {
-        alert("حدث خطأ أثناء الحذف.");
+        alert(lang === "ar" ? "حدث خطأ أثناء الحذف." : "Deletion error.");
       }
     }
   };
@@ -774,6 +628,7 @@ const PatientAddForm = ({ patientsColRef, lang, dark, txt }) => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [riskFactors, setRiskFactors] = useState({});
+  const formRef = useRef(null);
 
   const RISKS = [
     "hypertension",
@@ -795,7 +650,16 @@ const PatientAddForm = ({ patientsColRef, lang, dark, txt }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const patientId = `P-${Date.now().toString().slice(-6)}`;
+
     try {
+      const formData = new FormData(formRef.current);
+
+      // جمع بيانات الفحص
+      const examinationData = {};
+      ["bp", "rbs", "ipp", "consciousLevel"].forEach((key) => {
+        examinationData[key] = formData.get(key) || "";
+      });
+
       await setDoc(doc(patientsColRef, patientId), {
         id: patientId,
         name: name,
@@ -803,26 +667,24 @@ const PatientAddForm = ({ patientsColRef, lang, dark, txt }) => {
         createdAt: serverTimestamp(),
 
         // Personal History
-        presentation: e.target.presentation.value || "",
+        presentation: formData.get("presentation") || "",
         riskFactors: riskFactors,
 
-        // Examination (Initial empty state)
-        examination: {
-          bp: e.target.bp.value || "",
-          rbs: e.target.rbs.value || "",
-          ipp: e.target.ipp.value || "",
-          consciousLevel: e.target.consciousLevel.value || "",
-        },
+        // Examination
+        examination: examinationData,
 
         // Investigations (Initial empty state)
         investigations: {
-          laboratory: [], // [ { key: 'cbc', value: '12', note: '', images: [] } ]
+          laboratory: [],
           imaging: [],
         },
       });
+
+      // إعادة ضبط الحقول
       setName("");
       setAge("");
       setRiskFactors({});
+      formRef.current.reset();
       alert(txt.addPatient + " " + (lang === "ar" ? "بنجاح!" : "Successful!"));
     } catch (e) {
       console.error("Error adding patient:", e);
@@ -830,7 +692,14 @@ const PatientAddForm = ({ patientsColRef, lang, dark, txt }) => {
     }
   };
 
-  const Input = ({ name, placeholder, value, onChange, type = "text" }) => (
+  const Input = ({
+    name,
+    placeholder,
+    value,
+    onChange,
+    type = "text",
+    required = true,
+  }) => (
     <input
       name={name}
       type={type}
@@ -840,7 +709,7 @@ const PatientAddForm = ({ patientsColRef, lang, dark, txt }) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      required={name !== "consciousLevel"}
+      required={required}
     />
   );
 
@@ -858,6 +727,7 @@ const PatientAddForm = ({ patientsColRef, lang, dark, txt }) => {
 
   return (
     <form
+      ref={formRef}
       onSubmit={handleSubmit}
       className={`mb-6 p-6 rounded-2xl shadow-lg space-y-4 ${
         dark ? "bg-slate-800" : "bg-white"
@@ -917,6 +787,7 @@ const PatientAddForm = ({ patientsColRef, lang, dark, txt }) => {
             className={`flex items-center space-x-2 cursor-pointer ${
               dark ? "text-slate-300" : "text-slate-700"
             }`}
+            dir={lang === "ar" ? "rtl" : "ltr"}
           >
             <input
               type="checkbox"
@@ -932,10 +803,14 @@ const PatientAddForm = ({ patientsColRef, lang, dark, txt }) => {
       {/* --- 2. EXAMINATION --- */}
       <Divider title={txt.examination} />
       <div className="grid grid-cols-2 gap-4">
-        <Input name="bp" placeholder={txt.bp} />
-        <Input name="rbs" placeholder={txt.rbs} />
-        <Input name="ipp" placeholder={txt.ipp} />
-        <Input name="consciousLevel" placeholder={txt.consciousLevel} />
+        <Input name="bp" placeholder={txt.bp} required={false} />
+        <Input name="rbs" placeholder={txt.rbs} required={false} />
+        <Input name="ipp" placeholder={txt.ipp} required={false} />
+        <Input
+          name="consciousLevel"
+          placeholder={txt.consciousLevel}
+          required={false}
+        />
       </div>
 
       <button
@@ -959,7 +834,8 @@ const PatientDetails = ({
   txt,
 }) => {
   const [currentPatient, setCurrentPatient] = useState(patient);
-  const [activeTab, setActiveTab] = useState("lab");
+  const [activeTab, setActiveTab] = useState("history");
+  const [invType, setInvType] = useState("lab"); // lab or img
   const [inputData, setInputData] = useState({ value: "", note: "" });
   const fileRef = useRef(null);
 
@@ -997,7 +873,13 @@ const PatientDetails = ({
     return new Promise((resolve, reject) => {
       if (file.size > 800 * 1024) {
         // 800KB Limit
-        reject(new Error("File size exceeds 800KB limit."));
+        reject(
+          new Error(
+            lang === "ar"
+              ? "حجم الملف يتجاوز 800KB."
+              : "File size exceeds 800KB limit."
+          )
+        );
         return;
       }
       const reader = new FileReader();
@@ -1218,7 +1100,10 @@ const PatientDetails = ({
                   : "bg-gray-50 border-gray-200"
               }`}
             >
-              {currentPatient.presentation || "لا توجد شكوى مسجلة"}
+              {currentPatient.presentation ||
+                (lang === "ar"
+                  ? "لا توجد شكوى مسجلة"
+                  : "No presentation recorded")}
             </p>
 
             <h3
@@ -1229,26 +1114,35 @@ const PatientDetails = ({
               {txt.riskFactors}
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {Object.entries(currentPatient.riskFactors || {}).map(
-                ([key, value]) => (
-                  <div
-                    key={key}
-                    className={`flex items-center space-x-2 ${
-                      value
-                        ? "text-green-500 font-bold"
-                        : "text-red-500 line-through"
-                    }`}
-                    dir="rtl"
-                  >
-                    {value ? (
-                      <Icons.Check className="w-5 h-5" />
-                    ) : (
-                      <Icons.X className="w-5 h-5" />
-                    )}
-                    <span>{txt[key]}</span>
-                  </div>
-                )
-              )}
+              {[
+                "hypertension",
+                "diabetes",
+                "af",
+                "ischemicHeart",
+                "pastStroke",
+                "regularOnTtt",
+                "renal",
+                "hepatic",
+                "smoker",
+                "addict",
+              ].map((key) => (
+                <div
+                  key={key}
+                  className={`flex items-center space-x-2 ${
+                    currentPatient.riskFactors?.[key]
+                      ? "text-green-500 font-bold"
+                      : "text-red-500 opacity-70 line-through"
+                  }`}
+                  dir="rtl"
+                >
+                  {currentPatient.riskFactors?.[key] ? (
+                    <Icons.Check className="w-5 h-5" />
+                  ) : (
+                    <Icons.X className="w-5 h-5" />
+                  )}
+                  <span>{txt[key]}</span>
+                </div>
+              ))}
             </div>
           </div>
         )}
@@ -1267,7 +1161,7 @@ const PatientDetails = ({
                   }`}
                 >
                   <strong className="text-blue-500">{txt[key]}:</strong>{" "}
-                  {value || "غير مسجل"}
+                  {value || (lang === "ar" ? "غير مسجل" : "Not recorded")}
                 </div>
               )
             )}
@@ -1288,18 +1182,34 @@ const PatientDetails = ({
               <h4 className="font-bold mb-3">
                 {lang === "ar" ? "إضافة فحص جديد" : "Add New Test"}
               </h4>
-              <select
-                onChange={(e) => setActiveTab(e.target.value)}
-                value={activeTab}
-                className={`w-full p-2 mb-3 rounded-lg border ${
-                  dark
-                    ? "bg-slate-800 border-slate-600 text-white"
-                    : "bg-white text-slate-800"
-                }`}
-              >
-                <option value="lab">{txt.laboratory}</option>
-                <option value="img">{txt.imaging}</option>
-              </select>
+              <div className="flex space-x-2 mb-3">
+                <button
+                  type="button"
+                  onClick={() => setInvType("lab")}
+                  className={`flex-1 py-2 rounded-lg font-bold transition-colors ${
+                    invType === "lab"
+                      ? "bg-blue-500 text-white"
+                      : dark
+                      ? "bg-slate-600 text-slate-300"
+                      : "bg-white text-gray-700"
+                  }`}
+                >
+                  {lang === "ar" ? "تحاليل" : "Labs"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setInvType("img")}
+                  className={`flex-1 py-2 rounded-lg font-bold transition-colors ${
+                    invType === "img"
+                      ? "bg-blue-500 text-white"
+                      : dark
+                      ? "bg-slate-600 text-slate-300"
+                      : "bg-white text-gray-700"
+                  }`}
+                >
+                  {lang === "ar" ? "أشعة" : "Imaging"}
+                </button>
+              </div>
 
               <select
                 name="testKey"
@@ -1308,7 +1218,7 @@ const PatientDetails = ({
                 }
                 value={
                   inputData.key ||
-                  (activeTab === "lab" ? LAB_KEYS[0] : IMG_KEYS[0])
+                  (invType === "lab" ? LAB_KEYS[0] : IMG_KEYS[0])
                 }
                 className={`w-full p-2 mb-3 rounded-lg border ${
                   dark
@@ -1316,7 +1226,7 @@ const PatientDetails = ({
                     : "bg-white text-slate-800"
                 }`}
               >
-                {(activeTab === "lab" ? LAB_KEYS : IMG_KEYS).map((key) => (
+                {(invType === "lab" ? LAB_KEYS : IMG_KEYS).map((key) => (
                   <option key={key} value={key}>
                     {txt[key]}
                   </option>
@@ -1370,19 +1280,14 @@ const PatientDetails = ({
               </label>
 
               <button
-                onClick={() =>
-                  handleAddInvestigation(
-                    inputData.key ||
-                      (activeTab === "lab" ? LAB_KEYS[0] : IMG_KEYS[0])
-                  )
-                }
+                onClick={handleAddInvestigation}
                 className="w-full bg-green-600 text-white py-2 rounded-lg font-bold hover:bg-green-700 transition-colors mt-3"
               >
                 {txt.save}
               </button>
             </div>
 
-            {/* 2. LAB RECORDS */}
+            {/* 2. RECORDS LIST */}
             <div className="lg:col-span-2 space-y-6">
               <h3
                 className={`text-xl font-bold ${
@@ -1503,6 +1408,7 @@ const AuthScreen = ({ lang, setLang, dark, setDark, setAppRole }) => {
       }
     } catch (err) {
       console.error("Auth Error:", err);
+      // رسالة خطأ موحدة لأسباب أمنية
       alert(
         lang === "ar"
           ? "خطأ في البريد أو كلمة المرور، أو الحساب غير مفعّل."
