@@ -72,6 +72,7 @@ const t = {
     loginBtn: "دخول",
     createAcc: "حساب جديد",
     diagnosis: "تشخيص",
+    finalDiagnosis: "التشخيص النهائي",
     treatment: "علاج",
     radiology: "أشعة",
     note: "ملاحظة",
@@ -85,6 +86,10 @@ const t = {
     profileSetup: "بيانات الطبيب",
     fullName: "الاسم",
     college: "الكلية",
+    seniority: "الدرجة الوظيفية",
+    junior: "جونيور",
+    mid: "ميد سينيور",
+    senior: "سينيور",
     specialty: "التخصص",
     role: "الدور",
     doc: "طبيب",
@@ -103,7 +108,53 @@ const t = {
     deptDist: "التوزيع بالأقسام",
     name: "الاسم",
     age: "العمر",
-    presentation: "الشكوى",
+    patientName: "اسم المريض",
+    personalHistory: "السجل الشخصي وعوامل الخطورة",
+    examination: "فحص القراءات والقياسات",
+    investigations: "التحاليل والأشعة",
+    presentation: "شكوى المريض الحالية (Presentation)",
+    riskFactors: "عوامل الخطورة (Risk Factors)",
+    hypertension: "ضغط دم مرتفع",
+    diabetes: "سكري",
+    af: "رجفان أذيني (AF)",
+    ischemicHeart: "مرض القلب الإقفاري",
+    pastStroke: "سكتة دماغية سابقة",
+    regularOnTtt: "منتظم على العلاج",
+    renal: "مشاكل كلوية",
+    hepatic: "مشاكل كبدية",
+    smoker: "مدخن",
+    addict: "إدمان/تعاطي",
+    bp: "ضغط الدم (BP)",
+    rbs: "سكر عشوائي (RBS)",
+    ipp: "القوة العضلية (Power)",
+    consciousLevel: "مستوى الوعي",
+    laboratory: "التحاليل المخبرية",
+    cbc: "تعداد الدم (CBC)",
+    creat: "كرياتينين (Creat)",
+    urea: "يوريا",
+    pt: "زمن البروثرومبين (PT)",
+    na: "صوديوم (Na)",
+    k: "بوتاسيوم (K)",
+    ca: "كالسيوم (Ca)",
+    uricAcid: "حمض البوليك",
+    hba1c: "سكر تراكمي (HbA1c)",
+    toxo: "السمية (Toxo)",
+    urineAnalysis: "تحليل البول",
+    csf: "سائل النخاع الشوكي (CSF)",
+    autoimmuneStudies: "مناعة ذاتية",
+    imaging: "الأشعة والفحوصات",
+    ct: "أشعة مقطعية (CT)",
+    mri: "رنين مغناطيسي (MRI)",
+    ncs: "توصيل عصبي (NCS)",
+    eeg: "تخطيط الدماغ (EEG)",
+    emg: "تخطيط العضلات (EMG)",
+    vep: "كمونات محرضة (VEP)",
+    fundusEx: "فحص قاع العين",
+    value: "القيمة/النتيجة",
+    patientRecord: "سجل المريض الكامل",
+    uploadImage: "إرفاق صورة (بحد أقصى 800KB)",
+    image: "صورة",
+    noImage: "لا توجد صورة مرفقة",
     date: "التاريخ",
     generatedOn: "تاريخ التقرير",
     welcomeVerse: "وَمَنْ أَحْيَاهَا فَكَأَنَّمَا أَحْيَا النَّاسَ جَمِيعًا",
@@ -137,9 +188,10 @@ const t = {
     loginBtn: "Login",
     createAcc: "Sign Up",
     diagnosis: "Diagnosis",
+    finalDiagnosis: "Final Diagnosis",
     treatment: "Treatment",
     radiology: "Radiology",
-    note: "Note",
+    note: "Doctor's Note",
     upload: "Image",
     addRecord: "Add",
     details: "Details",
@@ -150,6 +202,10 @@ const t = {
     profileSetup: "Profile",
     fullName: "Name",
     college: "College",
+    seniority: "Seniority Level",
+    junior: "Junior",
+    mid: "Mid Senior",
+    senior: "Senior",
     specialty: "Specialty",
     role: "Role",
     doc: "Doctor",
@@ -168,7 +224,51 @@ const t = {
     deptDist: "Dept Dist.",
     name: "Name",
     age: "Age",
-    presentation: "Presentation",
+    patientName: "Patient Name",
+    presentation: "Current Presentation",
+    riskFactors: "Risk Factors",
+    hypertension: "Hypertension",
+    diabetes: "Diabetes",
+    af: "Atrial Fibrillation (AF)",
+    ischemicHeart: "Ischemic Heart Disease",
+    pastStroke: "Past Stroke",
+    regularOnTtt: "Regular on Treatment",
+    renal: "Renal Problems",
+    hepatic: "Hepatic Problems",
+    smoker: "Smoker",
+    addict: "Addict",
+    bp: "Blood Pressure (BP)",
+    rbs: "Random Blood Sugar (RBS)",
+    ipp: "Muscle Power",
+    consciousLevel: "Conscious Level",
+    laboratory: "Laboratory Tests",
+    cbc: "Complete Blood Count (CBC)",
+    creat: "Creatinine (Creat)",
+    urea: "Urea",
+    pt: "Prothrombin Time (PT)",
+    na: "Sodium (Na)",
+    k: "Potassium (K)",
+    ca: "Calcium (Ca)",
+    uricAcid: "Uric Acid",
+    hba1c: "HbA1c",
+    toxo: "Toxo",
+    urineAnalysis: "Urine Analysis",
+    csf: "CSF",
+    autoimmuneStudies: "Autoimmune Studies",
+    imaging: "Imaging and Diagnostics",
+    ct: "CT Scan",
+    mri: "MRI",
+    ncs: "Nerve Conduction Study (NCS)",
+    eeg: "Electroencephalogram (EEG)",
+    emg: "Electromyography (EMG)",
+    vep: "Visual Evoked Potential (VEP)",
+    fundusEx: "Fundus Examination",
+    value: "Value/Result",
+    note: "Doctor's Note",
+    uploadImage: "Attach Image (Max 800KB)",
+    image: "Image",
+    noImage: "No image attached",
+    patientRecord: "Full Patient Record",
     date: "Date",
     generatedOn: "Generated On",
     welcomeVerse:
@@ -179,12 +279,13 @@ const t = {
 
 // --- الأيقونات ---
 const Icons = {
-  Menu: () => (
+  Menu: (props) => (
     <svg
       className="w-6 h-6"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -194,12 +295,13 @@ const Icons = {
       />
     </svg>
   ),
-  Dashboard: () => (
+  Dashboard: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -209,12 +311,13 @@ const Icons = {
       />
     </svg>
   ),
-  Users: () => (
+  Users: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -224,12 +327,13 @@ const Icons = {
       />
     </svg>
   ),
-  AddUser: () => (
+  AddUser: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -239,12 +343,13 @@ const Icons = {
       />
     </svg>
   ),
-  Activity: () => (
+  Activity: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -254,12 +359,13 @@ const Icons = {
       />
     </svg>
   ),
-  Logout: () => (
+  Logout: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -269,12 +375,13 @@ const Icons = {
       />
     </svg>
   ),
-  Print: () => (
+  Print: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -284,12 +391,13 @@ const Icons = {
       />
     </svg>
   ),
-  Filter: () => (
+  Filter: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -299,12 +407,13 @@ const Icons = {
       />
     </svg>
   ),
-  Trash: () => (
+  Trash: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -314,12 +423,13 @@ const Icons = {
       />
     </svg>
   ),
-  Upload: () => (
+  Upload: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -329,12 +439,13 @@ const Icons = {
       />
     </svg>
   ),
-  Back: () => (
+  Back: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -344,12 +455,13 @@ const Icons = {
       />
     </svg>
   ),
-  Search: () => (
+  Search: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -359,12 +471,13 @@ const Icons = {
       />
     </svg>
   ),
-  Edit: () => (
+  Edit: (props) => (
     <svg
       className="w-4 h-4"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -374,12 +487,13 @@ const Icons = {
       />
     </svg>
   ),
-  Save: () => (
+  Save: (props) => (
     <svg
       className="w-4 h-4"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -389,27 +503,24 @@ const Icons = {
       />
     </svg>
   ),
-  Close: () => (
+  Close: (props) => (
     <svg
       className="w-4 h-4"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M6 18L18 6M6 6l12 12"
-      />
+      <path d="M6 18L18 6M6 6l12 12" />
     </svg>
   ),
-  Sun: () => (
+  Sun: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -419,12 +530,13 @@ const Icons = {
       />
     </svg>
   ),
-  Moon: () => (
+  Moon: (props) => (
     <svg
       className="w-5 h-5"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -434,18 +546,35 @@ const Icons = {
       />
     </svg>
   ),
-  Quran: () => (
+  Quran: (props) => (
     <svg
       className="w-6 h-6"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      {...props}
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
         d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+      />
+    </svg>
+  ),
+  Plus: (props) => (
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 4v16m8-8H4"
       />
     </svg>
   ),
@@ -565,20 +694,50 @@ const DonutChart = ({ data, dark }) => {
   );
 };
 
-// --- شاشة الدخول ---
+// --- شاشة الدخول (Auth Screen) ---
 const AuthScreen = ({ lang, setLang, dark, setDark }) => {
   const [isReg, setIsReg] = useState(false);
   const [email, setE] = useState("");
   const [pass, setP] = useState("");
+  const [college, setCollege] = useState(""); // جديد
+  const [seniority, setSeniority] = useState("junior"); // جديد
   const [loading, setL] = useState(false);
   const txt = t[lang];
 
-  const handle = async (e) => {
+  const handleAuth = async (e) => {
     e.preventDefault();
     setL(true);
     try {
-      if (isReg) await createUserWithEmailAndPassword(auth, email, pass);
-      else await signInWithEmailAndPassword(auth, email, pass);
+      if (isReg) {
+        // التسجيل: إنشاء حساب ثم إضافة ملف الطبيب
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          pass
+        );
+        const newUser = userCredential.user;
+
+        // إضافة بيانات إكمال الملف المطلوبة في Firestore
+        await setDoc(doc(db, "doctors", newUser.uid), {
+          name: newUser.email.split("@")[0], // اسم مؤقت
+          college: college,
+          seniority: seniority,
+          role: "doctor", // الدور الافتراضي
+          email: newUser.email,
+          createdAt: serverTimestamp(),
+        });
+
+        // تحديث اسم العرض في Auth
+        await updateProfile(newUser, {
+          displayName: newUser.email.split("@")[0],
+        });
+
+        // إعادة تحميل النافذة لكي يتم تفعيل الـ onAuthStateChanged
+        window.location.reload();
+      } else {
+        // الدخول
+        await signInWithEmailAndPassword(auth, email, pass);
+      }
     } catch (err) {
       alert(err.message);
     }
@@ -599,7 +758,7 @@ const AuthScreen = ({ lang, setLang, dark, setDark }) => {
       >
         <div className="flex justify-between mb-4">
           <button onClick={() => setDark(!dark)} className="text-xl">
-            {dark ? "☀️" : "🌙"}
+            {dark ? <Icons.Sun /> : <Icons.Moon />}
           </button>
           <button
             onClick={() => setLang(lang === "ar" ? "en" : "ar")}
@@ -620,7 +779,7 @@ const AuthScreen = ({ lang, setLang, dark, setDark }) => {
             {txt.appTitle}
           </h1>
         </div>
-        <form onSubmit={handle} className="space-y-4">
+        <form onSubmit={handleAuth} className="space-y-4">
           <input
             className={`w-full p-3 border rounded-lg outline-none ${
               dark ? "bg-slate-700 border-slate-600 text-white" : "bg-white"
@@ -641,31 +800,59 @@ const AuthScreen = ({ lang, setLang, dark, setDark }) => {
             onChange={(e) => setP(e.target.value)}
             required
           />
+          {isReg && (
+            <div className="space-y-4">
+              <input
+                className={`w-full p-3 border rounded-lg outline-none ${
+                  dark ? "bg-slate-700 border-slate-600 text-white" : "bg-white"
+                }`}
+                placeholder={txt.college}
+                type="text"
+                value={college}
+                onChange={(e) => setCollege(e.target.value)}
+                required
+              />
+              <select
+                className={`w-full p-3 border rounded-lg outline-none ${
+                  dark ? "bg-slate-700 border-slate-600 text-white" : "bg-white"
+                }`}
+                value={seniority}
+                onChange={(e) => setSeniority(e.target.value)}
+              >
+                <option value="junior">{txt.junior}</option>
+                <option value="mid">{txt.mid}</option>
+                <option value="senior">{txt.senior}</option>
+              </select>
+            </div>
+          )}
           <button
             disabled={loading}
-            className="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800 transition-all"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-all"
           >
             {loading ? "..." : isReg ? txt.createAcc : txt.loginBtn}
           </button>
         </form>
-        <button
-          onClick={() => setIsReg(!isReg)}
-          className="w-full mt-4 text-sm text-blue-600 hover:underline"
-        >
-          {isReg ? txt.haveAcc : txt.noAcc}
-        </button>
+        <div className="mt-4 text-sm text-center">
+          <button
+            onClick={() => setIsReg(!isReg)}
+            className="text-blue-500 hover:text-blue-600 font-medium"
+          >
+            {isReg ? txt.login : txt.createAcc}
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-// --- إكمال البيانات ---
+// --- إكمال البيانات (Profile Setup) ---
 const ProfileSetup = ({ user, onComplete, lang, dark }) => {
   const [name, setName] = useState("");
   const [college, setCollege] = useState("");
   const [specialty, setSpecialty] = useState("");
   const [gender, setGender] = useState("male");
   const [role, setRole] = useState("doctor");
+  const [seniority, setSeniority] = useState("junior");
   const txt = t[lang];
 
   useEffect(() => {
@@ -682,6 +869,7 @@ const ProfileSetup = ({ user, onComplete, lang, dark }) => {
       await setDoc(doc(db, "doctors", user.uid), {
         name,
         college,
+        seniority,
         specialty,
         gender,
         role,
@@ -743,6 +931,19 @@ const ProfileSetup = ({ user, onComplete, lang, dark }) => {
               placeholder={txt.specialty}
             />
           </div>
+
+          <select
+            value={seniority}
+            onChange={(e) => setSeniority(e.target.value)}
+            className={`w-full p-3 border rounded-lg ${
+              dark ? "bg-slate-700 border-slate-600 text-white" : ""
+            }`}
+          >
+            <option value="junior">{txt.junior}</option>
+            <option value="mid">{txt.mid}</option>
+            <option value="senior">{txt.senior}</option>
+          </select>
+
           {user.email !== "admin@medtrac.com" && (
             <select
               value={role}
@@ -795,7 +996,549 @@ const ProfileSetup = ({ user, onComplete, lang, dark }) => {
   );
 };
 
-// --- التطبيق الرئيسي ---
+// --- شاشة تفاصيل المريض (Patient Details) ---
+const PatientDetails = ({ patient, onBack, onDelete, lang, dark, txt }) => {
+  const [currentPatient, setCurrentPatient] = useState(patient);
+  const [activeTab, setActiveTab] = useState("history");
+  const [invType, setInvType] = useState("lab"); // lab or img
+  const [inputData, setInputData] = useState({
+    key: "cbc",
+    value: "",
+    note: "",
+  });
+  const [isEditingDiagnosis, setIsEditingDiagnosis] = useState(false);
+  const [newDiagnosis, setNewDiagnosis] = useState(
+    patient.finalDiagnosis || ""
+  );
+  const fileRef = useRef(null);
+
+  const LAB_KEYS = [
+    "cbc",
+    "creat",
+    "urea",
+    "pt",
+    "na",
+    "k",
+    "ca",
+    "uricAcid",
+    "hba1c",
+    "toxo",
+    "urineAnalysis",
+    "csf",
+    "autoimmuneStudies",
+  ];
+  const IMG_KEYS = ["ct", "mri", "ncs", "eeg", "emg", "vep", "fundusEx"];
+
+  useEffect(() => {
+    const docRef = doc(db, "patients", patient.id);
+    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setCurrentPatient(docSnap.data());
+      }
+    });
+    return () => unsubscribe();
+  }, [patient.id]);
+
+  const handleUpdateDiagnosis = async () => {
+    try {
+      await updateDoc(doc(db, "patients", currentPatient.id), {
+        finalDiagnosis: newDiagnosis,
+      });
+      setCurrentPatient({ ...currentPatient, finalDiagnosis: newDiagnosis });
+      setIsEditingDiagnosis(false);
+      alert(
+        txt.finalDiagnosis + " " + (lang === "ar" ? "تم تحديثه." : "Updated.")
+      );
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      if (file.size > 800 * 1024) {
+        reject(new Error("حجم الملف يتجاوز 800KB."));
+        return;
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleAddInvestigation = async () => {
+    const file = fileRef.current?.files[0];
+    let base64Image = "";
+    const selectedKey =
+      inputData.key || (invType === "lab" ? LAB_KEYS[0] : IMG_KEYS[0]);
+
+    if (file) {
+      try {
+        base64Image = await fileToBase64(file);
+      } catch (e) {
+        alert(e.message);
+        return;
+      }
+    }
+
+    const newRecord = {
+      key: selectedKey,
+      value: inputData.value || "",
+      note: inputData.note || "",
+      image: base64Image,
+      date: new Date().toLocaleDateString(lang === "ar" ? "ar-EG" : "en-US"),
+      timestamp: serverTimestamp(),
+    };
+
+    const targetType = invType === "lab" ? "laboratory" : "imaging";
+
+    try {
+      const docRef = doc(db, "patients", currentPatient.id);
+      const currentInv = currentPatient.investigations || {
+        laboratory: [],
+        imaging: [],
+      };
+
+      await updateDoc(docRef, {
+        investigations: {
+          ...currentInv,
+          [targetType]: arrayUnion(newRecord),
+        },
+      });
+
+      setInputData({ key: selectedKey, value: "", note: "" });
+      if (fileRef.current) fileRef.current.value = "";
+      alert(
+        lang === "ar" ? "تم إضافة السجل بنجاح!" : "Record added successfully!"
+      );
+    } catch (e) {
+      console.error("Error adding investigation:", e);
+      alert(
+        lang === "ar" ? "حدث خطأ أثناء إضافة السجل." : "Error adding record."
+      );
+    }
+  };
+
+  const renderRecords = (data) => {
+    if (!data || data.length === 0) {
+      return (
+        <p
+          className={`p-4 text-center ${
+            dark ? "text-slate-400" : "text-gray-500"
+          }`}
+        >
+          {txt.noRecords}
+        </p>
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        {data
+          .slice()
+          .reverse()
+          .map((record, index) => (
+            <div
+              key={index}
+              className={`p-4 rounded-xl border ${
+                dark
+                  ? "bg-slate-700 border-slate-600"
+                  : "bg-gray-50 border-gray-200"
+              }`}
+            >
+              <div className="flex justify-between items-start mb-2">
+                <span className="font-bold text-lg text-blue-500">
+                  {txt[record.key]}
+                </span>
+                <span className="text-xs text-gray-500">{record.date}</span>
+              </div>
+              {record.value && (
+                <p className="mb-2">
+                  <strong>{txt.value}:</strong> {record.value}
+                </p>
+              )}
+              {record.note && (
+                <p className="mb-2">
+                  <strong>{txt.note}:</strong> {record.note}
+                </p>
+              )}
+
+              {record.image && (
+                <div className="mt-3">
+                  <strong>{txt.image}:</strong>
+                  <img
+                    src={record.image}
+                    alt={txt[record.key]}
+                    className="w-full max-h-60 object-contain rounded-lg border mt-1"
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+      </div>
+    );
+  };
+
+  return (
+    <div className="p-4 md:p-8">
+      <div className="flex justify-between items-center mb-6">
+        <button
+          onClick={onBack}
+          className="flex items-center text-blue-500 hover:text-blue-700 font-bold"
+        >
+          <Icons.Back className={lang === "ar" ? "ml-2" : "mr-2"} />{" "}
+          {lang === "ar" ? "عودة للمرضى" : "Back to Patients"}
+        </button>
+        <button
+          onClick={() => onDelete(patient.id)}
+          className="text-red-500 hover:text-red-700"
+        >
+          {lang === "ar" ? "حذف المريض" : "Delete Patient"}
+        </button>
+      </div>
+
+      <h1
+        className={`text-4xl font-extrabold ${
+          dark ? "text-white" : "text-slate-800"
+        }`}
+      >
+        {currentPatient.name}
+      </h1>
+
+      <div
+        className={`mt-4 p-4 rounded-xl text-sm relative group mb-6 border ${
+          dark
+            ? "bg-slate-700 border-blue-900/20 text-blue-200"
+            : "bg-blue-50 border-blue-100 text-blue-800"
+        }`}
+      >
+        <strong>{txt.finalDiagnosis}:</strong>
+        {isEditingDiagnosis ? (
+          <div className="mt-2 flex gap-2">
+            <textarea
+              value={newDiagnosis}
+              onChange={(e) => setNewDiagnosis(e.target.value)}
+              className={`flex-1 p-2 border rounded-lg ${
+                dark ? "bg-slate-800 border-slate-600 text-white" : ""
+              }`}
+              rows="2"
+              placeholder={
+                lang === "ar"
+                  ? "اكتب التشخيص النهائي هنا..."
+                  : "Enter final diagnosis here..."
+              }
+            />
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={handleUpdateDiagnosis}
+                className="p-2 bg-green-500 text-white rounded-lg"
+              >
+                <Icons.Save className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setIsEditingDiagnosis(false)}
+                className="p-2 bg-gray-300 text-gray-700 rounded-lg"
+              >
+                <Icons.Close className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-1 pr-6 relative">
+            {currentPatient.finalDiagnosis ||
+              (lang === "ar"
+                ? "لم يتم تسجيل التشخيص النهائي بعد."
+                : "Final diagnosis not yet recorded.")}
+            <button
+              onClick={() => setIsEditingDiagnosis(true)}
+              className="absolute top-0 right-0 p-1 text-blue-400 hover:text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <Icons.Edit className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="grid grid-cols-3 gap-2 mb-6">
+        <button
+          onClick={() => setActiveTab("history")}
+          className={`p-3 rounded-t-lg font-bold transition-colors ${
+            activeTab === "history"
+              ? dark
+                ? "bg-blue-600 text-white"
+                : "bg-blue-500 text-white"
+              : dark
+              ? "bg-slate-700 text-slate-300 hover:bg-slate-600"
+              : "bg-white text-gray-700 hover:bg-gray-100"
+          }`}
+        >
+          {txt.personalHistory}
+        </button>
+        <button
+          onClick={() => setActiveTab("exam")}
+          className={`p-3 rounded-t-lg font-bold transition-colors ${
+            activeTab === "exam"
+              ? dark
+                ? "bg-blue-600 text-white"
+                : "bg-blue-500 text-white"
+              : dark
+              ? "bg-slate-700 text-slate-300 hover:bg-slate-600"
+              : "bg-white text-gray-700 hover:bg-gray-100"
+          }`}
+        >
+          {txt.examination}
+        </button>
+        <button
+          onClick={() => setActiveTab("invest")}
+          className={`p-3 rounded-t-lg font-bold transition-colors ${
+            activeTab === "invest"
+              ? dark
+                ? "bg-blue-600 text-white"
+                : "bg-blue-500 text-white"
+              : dark
+              ? "bg-slate-700 text-slate-300 hover:bg-slate-600"
+              : "bg-white text-gray-700 hover:bg-gray-100"
+          }`}
+        >
+          {txt.investigations}
+        </button>
+      </div>
+
+      <div
+        className={`p-6 rounded-b-xl shadow-lg ${
+          dark ? "bg-slate-800" : "bg-white"
+        }`}
+      >
+        {activeTab === "history" && (
+          <div className="space-y-4">
+            <h3
+              className={`text-xl font-bold ${
+                dark ? "text-blue-400" : "text-blue-600"
+              }`}
+            >
+              {txt.presentation}
+            </h3>
+            <p
+              className={`p-3 rounded-lg border ${
+                dark
+                  ? "bg-slate-700 border-slate-600"
+                  : "bg-gray-50 border-gray-200"
+              }`}
+            >
+              {currentPatient.presentation ||
+                (lang === "ar"
+                  ? "لا توجد شكوى مسجلة"
+                  : "No presentation recorded")}
+            </p>
+
+            <h3
+              className={`text-xl font-bold pt-4 ${
+                dark ? "text-blue-400" : "text-blue-600"
+              }`}
+            >
+              {txt.riskFactors}
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {[
+                "hypertension",
+                "diabetes",
+                "af",
+                "ischemicHeart",
+                "pastStroke",
+                "regularOnTtt",
+                "renal",
+                "hepatic",
+                "smoker",
+                "addict",
+              ].map((key) => (
+                <div
+                  key={key}
+                  className={`flex items-center space-x-2 ${
+                    currentPatient.riskFactors?.[key]
+                      ? "text-green-500 font-bold"
+                      : "text-red-500 opacity-70 line-through"
+                  }`}
+                  dir="rtl"
+                >
+                  {currentPatient.riskFactors?.[key] ? (
+                    <Icons.Check className="w-5 h-5" />
+                  ) : (
+                    <Icons.X className="w-5 h-5" />
+                  )}
+                  <span>{txt[key]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === "exam" && (
+          <div className="space-y-4">
+            {Object.entries(currentPatient.examination || {}).map(
+              ([key, value]) => (
+                <div
+                  key={key}
+                  className={`p-3 rounded-lg border ${
+                    dark
+                      ? "bg-slate-700 border-slate-600"
+                      : "bg-gray-50 border-gray-200"
+                  }`}
+                >
+                  <strong className="text-blue-500">{txt[key]}:</strong>{" "}
+                  {value || (lang === "ar" ? "غير مسجل" : "Not recorded")}
+                </div>
+              )
+            )}
+          </div>
+        )}
+
+        {activeTab === "invest" && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div
+              className={`lg:col-span-1 p-4 rounded-xl h-fit border ${
+                dark
+                  ? "bg-slate-700 border-slate-600"
+                  : "bg-gray-100 border-gray-200"
+              }`}
+            >
+              <h4 className="font-bold mb-3">
+                {lang === "ar" ? "إضافة فحص جديد" : "Add New Test"}
+              </h4>
+              <div className="flex space-x-2 mb-3">
+                <button
+                  type="button"
+                  onClick={() => setInvType("lab")}
+                  className={`flex-1 py-2 rounded-lg font-bold transition-colors ${
+                    invType === "lab"
+                      ? "bg-blue-500 text-white"
+                      : dark
+                      ? "bg-slate-600 text-slate-300"
+                      : "bg-white text-gray-700"
+                  }`}
+                >
+                  {lang === "ar" ? "تحاليل" : "Labs"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setInvType("img")}
+                  className={`flex-1 py-2 rounded-lg font-bold transition-colors ${
+                    invType === "img"
+                      ? "bg-blue-500 text-white"
+                      : dark
+                      ? "bg-slate-600 text-slate-300"
+                      : "bg-white text-gray-700"
+                  }`}
+                >
+                  {lang === "ar" ? "أشعة" : "Imaging"}
+                </button>
+              </div>
+
+              <select
+                name="testKey"
+                onChange={(e) =>
+                  setInputData({ ...inputData, key: e.target.value })
+                }
+                value={
+                  inputData.key ||
+                  (invType === "lab" ? LAB_KEYS[0] : IMG_KEYS[0])
+                }
+                className={`w-full p-2 mb-3 rounded-lg border ${
+                  dark
+                    ? "bg-slate-800 border-slate-600 text-white"
+                    : "bg-white text-slate-800"
+                }`}
+              >
+                {(invType === "lab" ? LAB_KEYS : IMG_KEYS).map((key) => (
+                  <option key={key} value={key}>
+                    {txt[key]}
+                  </option>
+                ))}
+              </select>
+
+              <input
+                type="text"
+                placeholder={txt.value}
+                value={inputData.value}
+                onChange={(e) =>
+                  setInputData({ ...inputData, value: e.target.value })
+                }
+                className={`w-full p-2 mb-3 rounded-lg border ${
+                  dark
+                    ? "bg-slate-800 border-slate-600 text-white"
+                    : "bg-white text-slate-800"
+                }`}
+              />
+              <textarea
+                placeholder={txt.note}
+                rows="2"
+                value={inputData.note}
+                onChange={(e) =>
+                  setInputData({ ...inputData, note: e.target.value })
+                }
+                className={`w-full p-2 mb-3 rounded-lg border ${
+                  dark
+                    ? "bg-slate-800 border-slate-600 text-white"
+                    : "bg-white text-slate-800"
+                }`}
+              />
+
+              <label
+                className={`flex items-center justify-center p-2 rounded-lg border cursor-pointer text-sm ${
+                  dark
+                    ? "bg-slate-600 border-slate-500 hover:bg-slate-500"
+                    : "bg-blue-100 border-blue-200 hover:bg-blue-200"
+                }`}
+              >
+                <Icons.Upload className="w-4 h-4" />
+                <span className={lang === "ar" ? "mr-2" : "ml-2"}>
+                  {txt.uploadImage}
+                </span>
+                <input
+                  type="file"
+                  ref={fileRef}
+                  className="hidden"
+                  accept="image/*"
+                />
+              </label>
+
+              <button
+                onClick={handleAddInvestigation}
+                className="w-full bg-green-600 text-white py-2 rounded-lg font-bold hover:bg-green-700 transition-colors mt-3"
+              >
+                {txt.save}
+              </button>
+            </div>
+
+            <div className="lg:col-span-2 space-y-6">
+              <h3
+                className={`text-xl font-bold ${
+                  dark ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                {txt.laboratory}
+              </h3>
+              {renderRecords(currentPatient.investigations?.laboratory)}
+
+              <h3
+                className={`text-xl font-bold pt-4 border-t ${
+                  dark
+                    ? "text-blue-400 border-slate-700"
+                    : "text-blue-600 border-gray-200"
+                }`}
+              >
+                {txt.imaging}
+              </h3>
+              {renderRecords(currentPatient.investigations?.imaging)}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+// --- المكون الرئيسي (Main App) ---
 export default function MedicalApp() {
   const [user, setUser] = useState(null);
   const [profileData, setProfileData] = useState(null);
@@ -804,6 +1547,7 @@ export default function MedicalApp() {
   const [loading, setLoading] = useState(true);
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [showWelcome, setShowWelcome] = useState(false);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [lang, setLang] = useState("ar");
   const [dark, setDark] = useState(false);
@@ -819,7 +1563,12 @@ export default function MedicalApp() {
   const txt = t[lang];
 
   useEffect(() => {
-    // --- الستايلات والطباعة فقط ---
+    if (!document.getElementById("tailwind-script")) {
+      const script = document.createElement("script");
+      script.id = "tailwind-script";
+      script.src = "https://cdn.tailwindcss.com";
+      document.head.appendChild(script);
+    }
     const style = document.createElement("style");
     style.innerHTML = `
       @media print {
@@ -840,18 +1589,6 @@ export default function MedicalApp() {
       .animate-bounce-in { animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
     `;
     document.head.appendChild(style);
-
-    if (!document.getElementById("tailwind-script")) {
-      const script = document.createElement("script");
-      script.id = "tailwind-script";
-      script.src = "https://cdn.tailwindcss.com";
-      script.onload = () => {
-        if (window.tailwind) {
-          window.tailwind.config = { darkMode: "class", theme: { extend: {} } };
-        }
-      };
-      document.head.appendChild(script);
-    }
   }, []);
 
   useEffect(() => {
@@ -859,14 +1596,42 @@ export default function MedicalApp() {
     else document.documentElement.classList.remove("dark");
   }, [dark]);
 
+  // Auth & Data
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
       if (u) {
         const docSnap = await getDoc(doc(db, "doctors", u.uid));
+
         if (docSnap.exists()) {
-          setProfileData(docSnap.data());
+          const userData = docSnap.data();
+          setProfileData(userData);
+
+          // تأكيد وجود حقول التسجيل الجديدة (seniority, college)
+          if (!userData.seniority || !userData.college) {
+            const defaultSeniority = userData.seniority || "junior";
+            const defaultCollege = userData.college || "غير محدد";
+
+            await setDoc(
+              doc(db, "doctors", u.uid),
+              {
+                ...userData,
+                seniority: defaultSeniority,
+                college: defaultCollege,
+              },
+              { merge: true }
+            );
+            setProfileData({
+              ...userData,
+              seniority: defaultSeniority,
+              college: defaultCollege,
+            });
+          }
+
           setShowWelcome(true);
           setTimeout(() => setShowWelcome(false), 5000);
+        } else if (u.email) {
+          // إذا كان موثقاً لكن لا يوجد له ملف في Firestore (تسجيل جديد لم يكمل بياناته)
+          setProfileData({ role: "unknown" });
         }
         setUser(u);
       } else {
@@ -879,25 +1644,57 @@ export default function MedicalApp() {
   }, []);
 
   useEffect(() => {
-    if (user && profileData) {
+    if (user && profileData && profileData.role) {
       const q = query(collection(db, "patients"), orderBy("createdAt", "desc"));
-      const unsub = onSnapshot(q, (snap) =>
-        setPatients(snap.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
-      );
+      const unsub = onSnapshot(q, (snap) => {
+        setPatients(snap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      });
       return () => unsub();
     }
   }, [user, profileData]);
 
+  // Logic Functions
   const handleAdd = async (e) => {
     e.preventDefault();
     const form = e.target;
+
+    // جمع بيانات الـ Risk Factors
+    const riskFactors = {};
+    const RISKS = [
+      "hypertension",
+      "diabetes",
+      "af",
+      "ischemicHeart",
+      "pastStroke",
+      "regularOnTtt",
+      "renal",
+      "hepatic",
+      "smoker",
+      "addict",
+    ];
+    RISKS.forEach((key) => {
+      riskFactors[key] = form[key] ? form[key].checked : false;
+    });
+
+    // جمع بيانات الفحص
+    const examinationData = {};
+    ["bp", "rbs", "ipp", "consciousLevel"].forEach((key) => {
+      examinationData[key] = form[key] ? form[key].value : "";
+    });
+
     try {
       await addDoc(collection(db, "patients"), {
         name: form.name.value,
         age: form.age.value,
         department: form.dept.value,
         status: form.status.value,
+
+        // البيانات الجديدة والمُعدَّلة
         presentation: form.presentation.value,
+        riskFactors: riskFactors,
+        examination: examinationData,
+        investigations: { laboratory: [], imaging: [] }, // تهيئة الفحوصات
+
         admissionDate: new Date().toISOString().split("T")[0],
         creator: profileData.name,
         creatorId: user.uid,
@@ -913,8 +1710,13 @@ export default function MedicalApp() {
   const handleDelete = async (id) => {
     const isCreator = patients.find((p) => p.id === id)?.creatorId === user.uid;
     const isAdmin = profileData.role === "admin";
-    if (!isAdmin && !isCreator) return alert("غير مسموح بحذف حالات زملائك.");
+
+    if (!isAdmin && !isCreator)
+      return alert(
+        "غير مسموح بحذف حالات زملائك (فقط المدير أو الطبيب المسجل للحالة)."
+      );
     if (profileData.role === "nurse") return alert("Access Denied");
+
     if (window.confirm(txt.confirmDelete)) {
       try {
         await deleteDoc(doc(db, "patients", id));
@@ -929,7 +1731,10 @@ export default function MedicalApp() {
       await updateDoc(doc(db, "patients", selectedPatient.id), {
         presentation: newPresentation,
       });
-      setSelectedPatient({ ...selectedPatient, presentation: newPresentation });
+      setSelectedPatient({
+        ...selectedPatient,
+        presentation: newPresentation,
+      });
       setIsEditingPresentation(false);
     } catch (err) {
       alert(err.message);
@@ -944,7 +1749,7 @@ export default function MedicalApp() {
       new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
+        reader.onload = (e) => resolve(e.target.result);
         reader.onerror = (error) => reject(error);
       });
     let imgStr = "";
@@ -971,6 +1776,7 @@ export default function MedicalApp() {
     }
   };
 
+  // Filter & Stats
   const filteredPatients = patients.filter((p) => {
     const matchesSearch = p.name
       .toLowerCase()
@@ -1036,7 +1842,7 @@ export default function MedicalApp() {
     <button
       onClick={() => {
         onClick();
-        setMobileMenuOpen(false);
+        setMobileMenuOpen(false); // Close menu on click (mobile)
       }}
       className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
         active
@@ -1071,6 +1877,7 @@ export default function MedicalApp() {
         </div>
       )}
 
+      {/* --- MOBILE OVERLAY --- */}
       {mobileMenuOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
@@ -1078,12 +1885,20 @@ export default function MedicalApp() {
         />
       )}
 
+      {/* --- SIDEBAR --- */}
       <aside
-        className={`fixed md:static inset-y-0 right-0 z-50 w-64 shadow-sm border-gray-100 flex flex-col transform transition-transform duration-300 ease-in-out ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"
-        } ${
-          dark ? "bg-slate-800 border-r border-slate-700" : "bg-white border-l"
-        }`}
+        className={`fixed md:static inset-y-0 right-0 z-50 w-64 shadow-sm border-gray-100 flex flex-col transform transition-transform duration-300 ease-in-out
+          ${
+            mobileMenuOpen
+              ? "translate-x-0"
+              : "translate-x-full md:translate-x-0"
+          }
+          ${
+            dark
+              ? "bg-slate-800 border-r border-slate-700"
+              : "bg-white border-l"
+          }
+        `}
       >
         <div
           className={`p-6 flex items-center justify-between font-bold text-xl border-b ${
@@ -1094,6 +1909,7 @@ export default function MedicalApp() {
             <Icons.Activity />
             <span>{txt.appTitle}</span>
           </div>
+          {/* Close Button for Mobile */}
           <button
             onClick={() => setMobileMenuOpen(false)}
             className="md:hidden text-gray-500"
@@ -1101,6 +1917,7 @@ export default function MedicalApp() {
             <Icons.Close />
           </button>
         </div>
+
         <div className="flex-1 py-6 space-y-1 px-3">
           <SidebarBtn
             icon={<Icons.Dashboard />}
@@ -1130,6 +1947,7 @@ export default function MedicalApp() {
             }}
           />
         </div>
+
         <div className="p-4 border-t">
           <div className="flex gap-2 mb-4">
             <button
@@ -1169,11 +1987,13 @@ export default function MedicalApp() {
         </div>
       </aside>
 
+      {/* --- MAIN CONTENT --- */}
       <main
         className={`flex-1 overflow-y-auto no-print ${
           dark ? "bg-slate-900" : "bg-slate-50"
         }`}
       >
+        {/* Mobile Header */}
         <div
           className={`md:hidden p-4 flex justify-between items-center shadow-sm sticky top-0 z-30 ${
             dark ? "bg-slate-800 text-white" : "bg-white text-slate-800"
@@ -1491,7 +2311,6 @@ export default function MedicalApp() {
                   )}
                 </div>
               </div>
-
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div
                   className={`p-6 rounded-2xl shadow-sm h-fit border ${
@@ -1733,6 +2552,9 @@ export default function MedicalApp() {
         </div>
       </main>
 
+      {/* Hidden Print Section logic maintained implicitly above within components */}
+      {/* If view is dashboard and no selected patient, stats print view is generated */}
+      {/* If selected patient, patient report print view is generated */}
       {!selectedPatient && view === "dashboard" && (
         <div className="print-only p-8 bg-white text-black">
           <div className="print-header">

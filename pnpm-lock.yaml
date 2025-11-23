@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  ajv:
+    specifier: ^8.17.1
+    version: 8.17.1
   firebase:
     specifier: 12.6.0
     version: 12.6.0
